@@ -1,0 +1,19 @@
+{
+  "name": "streamguard-dashboard",
+  "version": "1.0.0",
+  "description": "Live source-health, DLQ, and DQ-forecast dashboard for StreamGuard (Express API + React client)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "client:install": "npm --prefix client install",
+    "client:build": "npm --prefix client run build",
+    "client:dev": "npm --prefix client run dev",
+    "setup": "npm install && npm run client:install && npm run client:build"
+  },
+  "dependencies": {
+    "@confluentinc/kafka-javascript": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

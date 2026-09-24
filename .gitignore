@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Secrets — NEVER commit real keys. Only .env.example (placeholders) is tracked.
+.env
+**/.env
+.env.local
+**/.env.local
+*.pem
+*.key
+
+# Build output
+dist/
+**/dist/
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
