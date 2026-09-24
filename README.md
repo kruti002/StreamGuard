@@ -106,7 +106,7 @@ Prereqs: a Confluent Cloud account (free trial credit) and Node.js 18+.
 
 ---
 
-## Implementation notes (honest engineering)
+## Design notes
 
 - **Event-time windowing** on the Kafka record time keeps late/out-of-order
   events correct — a degrading source often gets laggy at the same time.
@@ -114,9 +114,7 @@ Prereqs: a Confluent Cloud account (free trial credit) and Node.js 18+.
   their failed rules so they can be triaged and replayed after the upstream fix.
 - **Contracts as executable logic** on top of Schema Registry capture semantic
   rules (ranges, enums, freshness) a plain schema can't express.
-- The Flink pipeline performs the contract enforcement, quarantine routing, and
-  windowed metrics. The dashboard applies the **identical contract** to
-  `raw_events` to guarantee a continuously live view for the demo (Confluent
-  Cloud's managed Flink ran the forecast-into-a-materialized-table variant as a
-  bounded job, so the live view is computed in the serving layer instead). Same
-  rules, same windows — computed where they stream reliably.
+- **Contract defined once, enforced in two places.** Flink handles contract
+  enforcement, quarantine routing, and windowed metrics on the cluster; the
+  serving layer applies the same contract to `raw_events` to drive a low-latency,
+  continuously live view for the dashboard. Same rules, same 10s windows.
