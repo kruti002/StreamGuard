@@ -34,6 +34,22 @@ A React dashboard shows the firewall working in real time:
   the exact contract rule it violated (`INVALID_CURRENCY`, `AMOUNT_OUT_OF_RANGE`,
   `MISSING_USER_ID`, `MALFORMED_TIMESTAMP`, `STALE_EVENT`, `MISSING_EVENT_ID`).
 
+### Source health + error-rate forecast
+
+`checkout-svc` degrades to a **43.64%** error rate and is flagged **BREACH**
+(time-to-breach: now, top failure mode: `MALFORMED_TIMESTAMP`), while the other
+sources stay **OK**. The chart tracks the observed error rate and its forecast
+against the 2% SLA line.
+
+![Source health board and error-rate forecast](docs/images/dashboard-health.png)
+
+### Dead-letter queue
+
+Every rejected record is preserved with the exact contract rule it broke —
+never silently dropped.
+
+![Dead-letter queue of quarantined records](docs/images/dashboard-dlq.png)
+
 ---
 
 ## Architecture
